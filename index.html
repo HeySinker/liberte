@@ -403,7 +403,27 @@
             </div>
           <div class="onion-link">
                 <p>🧅 الرابط الاحتياطي على شبكة تور: <a href="http://7xk4m9p2qw8n5vt3bg6hj1rz0cd8efy4ua9slx2qi7nwmkopdvh3elad.onion/library">http://7xk4m9p2qw8n5vt3bg6hj1rz0cd8efy4ua9slx2qi7nwmkopdvh3elad.onion</a></p>
-            </div>
+                              <p>Donate Bitcoin: <a href="http://7xk4m9p2qw8n5vt3bg6hj1rz0cd8efy4ua9slx2qi7nwmkopdvh3elad.onion/library">http://7xk4m9p2qw8n5vt3bg6hj1rz0cd8efy4ua9slx2qi7nwmkopdvh3elad.onion</a></p>
+                <p>🧅Donate Solana: <a href="solana:SamJzu73QqdE2Htv7mmn9MUDALypWRoR2H51qon5R9F?amount=0.3">SamJzu73QqdE2Htv7mmn9MUDALypWRoR2H51qon5R9F</a></p>
+
+<div class="onion-link">
+  <p>🧅 Donate Solana:
+    <!-- ضع عنوان المحفظة فقط في data-addr (بدون prefix solana:) -->
+    <a href="solana:SamJzu73QqdE2Htv7mmn9MUDALypWRoR2H51qon5R9F?amount=0.3"
+       class="copy-link"
+       data-addr="SamJzu73QqdE2Htv7mmn9MUDALypWRoR2H51qon5R9F"
+       title="اضغط للنسخ">SamJzu73QqdE2Htv7mmn9MUDALypWRoR2H51qon5R9F</a>
+  </p>
+</div>
+
+<div class="onion-link">
+  <p>Donate Bitcoin:
+    <a href="http://7xk4m9p2qw8n5vt3bg6hj1rz0cd8efy4ua9slx2qi7nwmkopdvh3elad.onion/library"
+       class="copy-link"
+       data-addr="1SamUEdkg5qkNPojCuvepTUMjSvp4WiUN"
+       title="اضغط للنسخ">1SamUEdkg5qkNPojCuvepTUMjSvp4WiUN</a>
+  </p>
+</div>
         </header>
         
         <main id="booksContainer">
@@ -9967,7 +9987,83 @@
             console.log('🗂️ كتب في مجلدات فرعية:', subfolderBooks);
         }
     </script>
+<script>
+  (function () {
+    function fallbackCopyTextToClipboard(text) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
+      // تجنب تغيير الستايل على الصفحة
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        var successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        return successful;
+      } catch (err) {
+        document.body.removeChild(textArea);
+        return false;
+      }
+    }
 
+    function copyTextToClipboard(text) {
+      if (!text) return Promise.reject('No text');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      } else {
+        var ok = fallbackCopyTextToClipboard(text);
+        return ok ? Promise.resolve() : Promise.reject('Copy failed');
+      }
+    }
+
+    function showCopied(elem) {
+      // أضف علامة موقتة وتزيلها بعد 1.5 ثانية
+      elem.classList.add('copied');
+
+      // نعرض عنصر tooltip صغير لو لم يكن موجودًا
+      var next = elem.nextElementSibling;
+      if (!next || !next.classList.contains('copy-tooltip')) {
+        var tip = document.createElement('span');
+        tip.className = 'copy-tooltip';
+        tip.textContent = 'Copied!';
+        elem.parentNode.insertBefore(tip, elem.nextSibling);
+      }
+
+      // وللوصول بالأصم/المكفوفين
+      var status = document.getElementById('copy-status');
+      if (status) status.textContent = 'Address copied to clipboard';
+
+      setTimeout(function () {
+        elem.classList.remove('copied');
+        if (status) status.textContent = '';
+        // نترك tooltip لكن بإمكانك حذفه لو أردت:
+        var t = elem.nextElementSibling;
+        if (t && t.classList.contains('copy-tooltip')) {
+          t.remove();
+        }
+      }, 1500);
+    }
+
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('.copy-link');
+      if (!el) return;
+      // لا نمنع التنقل لو الرابط يحتوي scheme مفيد (مثل solana:), لكن نمنع التحميل الافتراضي لأننا نريد نسخ
+      e.preventDefault();
+
+      var addr = el.getAttribute('data-addr') || el.textContent.trim();
+      if (!addr) return;
+
+      copyTextToClipboard(addr)
+        .then(function () { showCopied(el); })
+        .catch(function () {
+          // فشل النسخ: نعرض تنبيه بسيط
+          alert('فشل النسخ — برجاء النسخ يدوياً: ' + addr);
+        });
+    });
+  })();
+</script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const downloadLinks = document.querySelectorAll('a.download-btn');
@@ -10001,6 +10097,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
 
