@@ -389,6 +389,16 @@
         margin-top: 10px;
         word-break: break-all;
     }
+              .copy-link { cursor: pointer; text-decoration: underline; }
+  .copy-tooltip {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 0.9em;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .18s, transform .18s;
+  }
+  .copy-link.copied + .copy-tooltip { opacity: 1; transform: translateY(0); }
 }
     </style>
 </head>
@@ -408,7 +418,6 @@
 
 <div class="onion-link">
   <p>🧅 Donate Solana:
-    <!-- ضع عنوان المحفظة فقط في data-addr (بدون prefix solana:) -->
     <a href="solana:SamJzu73QqdE2Htv7mmn9MUDALypWRoR2H51qon5R9F?amount=0.3"
        class="copy-link"
        data-addr="SamJzu73QqdE2Htv7mmn9MUDALypWRoR2H51qon5R9F"
@@ -10097,6 +10106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
 
