@@ -274,19 +274,122 @@
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .books-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 15px;
-            }
-        }
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px 15px;
+        border-radius: 4px;
+    }
+    
+    .header {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+    
+    .header h1 {
+        font-size: 1.5em;
+        word-break: break-word;
+    }
+    
+    .header p {
+        font-size: 0.9em;
+    }
+    
+    .search-box {
+        margin: 20px auto 0;
+    }
+    
+    .search-box input {
+        padding: 12px 40px 12px 15px;
+        font-size: 0.9em;
+    }
+    
+    .search-icon {
+        left: 15px;
+        font-size: 0.9em;
+    }
+    
+    .section-title {
+        font-size: 1.3em;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .books-count {
+        font-size: 0.6em;
+        padding: 4px 10px;
+        margin-right: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .books-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .book-card {
+        padding: 20px 15px;
+    }
+    
+    .book-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    
+    .book-icon svg {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .book-title {
+        font-size: 1em;
+        min-height: auto;
+    }
+    
+    .book-meta {
+        font-size: 0.85em;
+        gap: 8px;
+    }
+    
+    .book-size, .book-pages {
+        padding: 3px 8px;
+        font-size: 0.9em;
+    }
+    
+    .download-btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    
+    .download-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .subfolder-badge {
+        font-size: 0.7em;
+        padding: 3px 8px;
+    }
+    
+    .footer {
+        padding-top: 20px;
+        margin-top: 30px;
+        font-size: 0.9em;
+    }
+    
+    .onion-link {
+        padding: 8px;
+        font-size: 0.7em;
+        margin-top: 10px;
+        word-break: break-all;
+    }
+}
     </style>
 </head>
 <body>
@@ -9898,5 +10001,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
